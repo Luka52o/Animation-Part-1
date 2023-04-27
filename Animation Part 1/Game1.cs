@@ -8,6 +8,9 @@ namespace Animation_Part_1
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        Texture2D tribbleBrownTexture, tribbleCreamTexture, tribbleGreyTexture, tribbleOrangeTexture;
+        Rectangle tribbleGreyRect;
+        Vector2 tribbleGreySpeed;
 
         public Game1()
         {
@@ -18,7 +21,12 @@ namespace Animation_Part_1
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 600;
+            tribbleGreyRect = new Rectangle(300, 10, 100, 100);
+
+            tribbleGreySpeed = new Vector2(0, 2); // setting the initial speed of the object
+            // this vector2 stores 2 values that represent the speed of an object broken into x & y components
 
             base.Initialize();
         }
@@ -26,8 +34,10 @@ namespace Animation_Part_1
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            tribbleBrownTexture = Content.Load<Texture2D>("tribbleBrown");
+            tribbleCreamTexture = Content.Load<Texture2D>("tribbleCream");
+            tribbleGreyTexture = Content.Load<Texture2D>("tribbleGrey");
+            tribbleOrangeTexture = Content.Load<Texture2D>("tribbleOrange");
         }
 
         protected override void Update(GameTime gameTime)
@@ -35,16 +45,28 @@ namespace Animation_Part_1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            tribbleGreyRect.X += (int)tribbleGreySpeed.X;
+            tribbleGreyRect.Y += (int)tribbleGreySpeed.Y; 
+        
+            if (tribbleGreyRect.Right > _graphics.PreferredBackBufferWidth || tribbleGreyRect.Left < 0)
+                tribbleGreySpeed.X *= -1;
 
+            if (tribbleGreyRect.Bottom > _graphics.PreferredBackBufferHeight || tribbleGreyRect.Top < 0)
+                tribbleGreyRect.Y *= -1;
+
+                
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.SlateGray);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(tribbleGreyTexture, tribbleGreyRect, Color.White);
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
