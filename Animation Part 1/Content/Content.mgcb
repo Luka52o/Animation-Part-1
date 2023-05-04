@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin introBackground.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:introBackground.jpg
+
 #begin space1.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -36,6 +48,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:space2.jpg
+
+#begin tribble_coo.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:tribble_coo.wav
 
 #begin tribbleBrown.png
 /importer:TextureImporter
